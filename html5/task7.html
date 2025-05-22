@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Video</title>
+    <style>
+        .video-container {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        #ready-message {
+            color: green;
+            display: none; /* Hidden by default */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <h3>Watch Our Event Preview</h3>
+        <p id="ready-message">✅ Video ready to play!</p>
+        <video 
+            width="100%" 
+            controls
+            oncanplay="document.getElementById('ready-message').style.display='block'"
+        >
+            <source src="event-video.mp4" type="video/mp4">
+            Your browser doesn’t support videos.
+        </video>
+    </div>
+</body>
+</html>
