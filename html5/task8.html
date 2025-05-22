@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Save Preferences</title>
+    <style>
+        .preference-box {
+            border: 1px solid #ddd;
+            padding: 20px;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="preference-box">
+        <h3>Your Preferences</h3>
+        <label>Favorite Event Type:</label>
+        <select id="event-pref">
+            <option value="">-- Choose --</option>
+            <option value="sports">Sports</option>
+            <option value="music">Music</option>
+        </select>
+        <button onclick="savePref()">Save</button>
+        <button onclick="clearPref()">Clear</button>
+        <p id="pref-status"></p>
+    </div>
+
+    <script>
+        // Load saved preference on page load
+        const savedPref = localStorage.getItem('eventPref');
+        if (savedPref) {
+            document.getElementById("event-pref").value = savedPref;
+            document.getElementById("pref-status").textContent = "Saved: " + savedPref;
+        }
+
+        function savePref() {
+            const pref = document.getElementById("event-pref").value;
+            localStorage.setItem('eventPref', pref);
+            document.getElementById("pref-status").textContent = "Saved!";
+        }
+
+        function clearPref() {
+            localStorage.removeItem('eventPref');
+            document.getElementById("event-pref").value = "";
+            document.getElementById("pref-status").textContent = "Cleared!";
+        }
+    </script>
+</body>
+</html>
