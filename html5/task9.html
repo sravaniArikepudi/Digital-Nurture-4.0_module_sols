@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Find Events</title>
+    <style>
+        #location-result {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="findLocation()">Find Events Near Me</button>
+    <div id="location-result">
+        Click the button to find nearby events.
+    </div>
+
+    <script>
+        function findLocation() {
+            const result = document.getElementById("location-result");
+            result.textContent = "Loading...";
+
+            if (!navigator.geolocation) {
+                result.textContent = "Geolocation not supported.";
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    result.innerHTML = `
+                        <strong>Your location:</strong><br>
+                        Latitude: ${position.coords.latitude}<br>
+                        Longitude: ${position.coords.longitude}<br>
+                        <em>(In a real app, we’d show events near you!)</em>
+                    `;
+                },
+                (error) => {
+                    result.textContent = "Error: " + error.message;
+                }
+            );
+        }
+    </script>
+</body>
+</html>
