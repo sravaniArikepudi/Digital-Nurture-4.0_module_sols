@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Feedback</title>
+  <style>
+    #image {
+      width: 200px;
+      height: 200px;
+      transition: transform 0.3s ease;
+    }
+    #image.enlarged {
+      transform: scale(1.5);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Event Feedback Form</h1>
+
+  <!-- Phone Number Field with onblur validation -->
+  <label for="phone">Phone Number:</label>
+  <input type="text" id="phone" onblur="
+    if (!/^\d{10}$/.test(this.value)) {
+      document.getElementById('phoneError').textContent = 'Enter 10-digit number';
+    } else {
+      document.getElementById('phoneError').textContent = '';
+    }">
+  <span id="phoneError" style="color:red;"></span>
+  <br><br>
+
+  <!-- Dropdown with onchange to show fee -->
+  <label for="event">Select Event:</label>
+  <select id="event" onchange="
+    let fee = this.options[this.selectedIndex].getAttribute('data-fee');
+    document.getElementById('eventFee').textContent = 'Fee: $' + fee;
+  ">
+    <option value="" disabled selected>-- Select an event --</option>
+    <option value="event1" data-fee="50">Event 1</option>
+    <option value="event2" data-fee="100">Event 2</option>
+    <option value="event3" data-fee="150">Event 3</option>
+  </select>
+  <span id="eventFee" style="margin-left:10px;"></span>
+  <br><br>
+
+  <!-- Textarea with keyup to count characters -->
+  <label for="feedback">Your Feedback:</label><br>
+  <textarea id="feedback" rows="4" cols="50" onkeyup="
+    document.getElementById('charCount').textContent = 'Characters: ' + this.value.length;
+  "></textarea>
+  <div id="charCount">Characters: 0</div>
+  <br>
+
+  <!-- Image with ondblclick to enlarge -->
+  <img id="image" src="https://via.placeholder.com/200" alt="Event" ondblclick="
+    this.classList.toggle('enlarged');
+  ">
+  <br><br>
+
+  <!-- Submit button with onclick confirmation -->
+  <button type="submit" onclick="
+    alert('Thank you! Your feedback has been submitted.');
+    return false;  // prevent actual form submission for demo
+  ">Submit</button>
+
+</body>
+</html>
